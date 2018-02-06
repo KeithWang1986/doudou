@@ -1,13 +1,19 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import Button from 'dd-button';
+import { LocaleProvider, LocaleValue, LocaleLabel } from 'dd-locale';
 
 
 class App extends React.Component {
-    render() {        
+    render() {
         return (
-            <Button /> 
-        ); 
+            <div>
+                <Button />
+                <LocaleProvider>
+                    <LocaleLabel value="Button.confirm" /> 
+                </LocaleProvider>
+            </div>
+        );
     }
 }
 

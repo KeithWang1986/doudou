@@ -1,6 +1,5 @@
 const resolveApp = require('./common');
 const file_list = require('../../public/file-list');
-const module_list = require('../../public/module-list');
 const webpack = require('webpack');
 
 const shouldUseSourceMap = false;
@@ -18,7 +17,7 @@ const config = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                include: module_list,
+                //include: module_list,
                 //exclude: /node_modules/,//屏蔽不需要处理的文件（文件夹）（可选）
                 loader: 'babel-loader'
             }
