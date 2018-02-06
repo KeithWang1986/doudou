@@ -1,5 +1,6 @@
 const resolveApp = require('./common');
 const file_list = require('../../public/file-list');
+const module_list = require('../../public/module-list');
 
 const config = {
     devtool: 'cheap-module-source-map',
@@ -12,8 +13,8 @@ const config = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                include: resolveApp('public/src'),
-                exclude: /node_modules/,//屏蔽不需要处理的文件（文件夹）（可选）
+                include: module_list,
+                //exclude: /node_modules/,//屏蔽不需要处理的文件（文件夹）（可选）
                 loader: 'babel-loader'
             }
         ]

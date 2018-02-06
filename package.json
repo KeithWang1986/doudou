@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/KeithWang1986/doudou#readme",
   "dependencies": {
+    "dd-button": "^1.0.5",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
