@@ -1,6 +1,8 @@
 const resolveApp = require('./common');
 const file_list = require('../../public/file-list');
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 const config = {
     devtool: 'cheap-module-source-map',
     entry: file_list,
@@ -18,9 +20,26 @@ const config = {
                 //include: module_list,
                 //exclude: /node_modules/,//屏蔽不需要处理的文件（文件夹）（可选）
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true //css压缩
+                            }
+                        }
+                    ]
+                })
             }
         ]
     },
+    plugins: [
+        new ExtractTextPlugin("css/[name].css")
+    ],
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
     node: {

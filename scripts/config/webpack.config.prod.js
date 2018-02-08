@@ -1,6 +1,7 @@
 const resolveApp = require('./common');
 const file_list = require('../../public/file-list');
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const shouldUseSourceMap = false;
 
@@ -22,6 +23,20 @@ const config = {
                 ],
                 //exclude: /node_modules/,//屏蔽不需要处理的文件（文件夹）（可选）
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true //css压缩
+                            }
+                        }
+                    ]
+                })
             }
         ]
     },
@@ -29,6 +44,7 @@ const config = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
+        new ExtractTextPlugin("css/[name].css"),        
         // Minify the code.
         new webpack.optimize.UglifyJsPlugin({
             compress: {
