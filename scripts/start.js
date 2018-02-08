@@ -18,8 +18,7 @@ const watching = compiler.watch(watchOptions, (err, stats) => {
 
     console.log(stats.toString({
         chunks: false,  // Makes the build much quieter
-        colors: true,   // Shows colors in the console
-        modules: false
+        colors: true   // Shows colors in the console
     }));
     console.log('\u001b[1m\u001b[32m');
     console.log('===== [ 开发环境 监控开始... ] =====');

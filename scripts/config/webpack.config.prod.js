@@ -17,7 +17,9 @@ const config = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                //include: module_list,
+                include: [
+                    /public\\src/
+                ],
                 //exclude: /node_modules/,//屏蔽不需要处理的文件（文件夹）（可选）
                 loader: 'babel-loader'
             }

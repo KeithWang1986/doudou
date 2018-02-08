@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/KeithWang1986/doudou#readme",
   "dependencies": {
-    "dd-button": "^1.0.5",
-    "dd-locale": "^1.0.0",
+    "dd-button": "^1.0.8",
+    "dd-locale": "^1.0.4",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
