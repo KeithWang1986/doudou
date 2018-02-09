@@ -3,50 +3,23 @@ let url = require("url");
 let path = require("path");
 let fs = require("fs");
 
-function onRequest(request, response) {
-    let pathname = url.parse(request.url).pathname;
-    let filepath = "";
-    let fileext = "";
-    if (pathname == "/") {
-        filepath = path.join(__dirname, "pages/index.html");
-        fileext = "";
-    }
-    else {
-        filepath = path.join(__dirname, pathname);
-        fileext = path.extname(filepath);
-    }
-    fs.stat(filepath, function (err, stats) {
-        if (err || stats.isDirectory()) {
-            console.log("Request for " + pathname + " 404.");
-            response.writeHead(404, { "Content-Type": "text/plain" });
-            response.write("404");
-            response.end();
-        }
-        else {
-            let contentType = "";
-            switch (fileext) {
-                case "":
-                case ".html":
-                    contentType = "text/html";
-                    break;
-                case ".css":
-                    contentType = "text/css";
-                    break;
-                case ".js":
-                    contentType = "application/javascript";
-                    break;
-                case ".ico":
-                    contentType = "application/x-ico";
-                    break;
-            }
-            response.writeHead(200, { "Content-Type": contentType });
-            fs.createReadStream(filepath).pipe(response);
-        }
-    });
-}
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
-const port = 81;
-http.createServer(onRequest).listen(port);
+var express = require('express');
+var proxy = require('http-proxy-middleware');
+var app = express();
+
+app.use('/data', proxy({ target: 'http://www.weather.com.cn', changeOrigin: true }));
+app.use('/public', express.static('public'));
+
+app.get('/', function (req, res) {
+  res.sendFile(resolveApp('pages/index.html'));
+});
+
+var server = app.listen(81);
+
+
 console.log("简单服务已启动.");
 var child_process = require('child_process');
-child_process.exec(`\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http://localhost:${port}/`);
+child_process.exec(`\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http://localhost:81/`);
