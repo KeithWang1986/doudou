@@ -16,7 +16,7 @@ export const fetchWeatherFailure = (error) => ({
 
 export const fetchWeather = (cityCode) => {
   return (dispatch) => {
-    const apiUrl = `/data/cityinfo/${cityCode}.html`;
+    const apiUrl = `/data/cityinfo/${cityCode}`;
 
     dispatch(fetchWeatherStarted())
 
@@ -26,7 +26,7 @@ export const fetchWeather = (cityCode) => {
       }
 
       response.json().then((responseJson) => {
-        dispatch(fetchWeatherSuccess(responseJson.weatherinfo));
+        dispatch(fetchWeatherSuccess(responseJson));
       }).catch((error) => {
         dispatch(fetchWeatherFailure(error));
       });

@@ -21721,7 +21721,7 @@ var fetchWeatherFailure = function fetchWeatherFailure(error) {
 
 var fetchWeather = function fetchWeather(cityCode) {
   return function (dispatch) {
-    var apiUrl = '/data/cityinfo/' + cityCode + '.html';
+    var apiUrl = '/data/cityinfo/' + cityCode;
 
     dispatch(fetchWeatherStarted());
 
@@ -21731,7 +21731,7 @@ var fetchWeather = function fetchWeather(cityCode) {
       }
 
       response.json().then(function (responseJson) {
-        dispatch(fetchWeatherSuccess(responseJson.weatherinfo));
+        dispatch(fetchWeatherSuccess(responseJson));
       }).catch(function (error) {
         dispatch(fetchWeatherFailure(error));
       });
@@ -21867,14 +21867,14 @@ Weather.propTypes = {
 
 var mapStateTopProps = function mapStateTopProps(state) {
   var weatherData = state.weather;
-
-  return {
-    status: weatherData.status,
-    cityName: weatherData.city,
-    weather: weatherData.weather,
-    lowestTemp: weatherData.temp1,
-    highestTemp: weatherData.temp2
-  };
+  return weatherData;
+  // return {
+  //   status: weatherData.status,
+  //   cityName: weatherData.city,
+  //   weather: weatherData.weather,
+  //   lowestTemp: weatherData.temp1,
+  //   highestTemp: weatherData.temp2
+  // };
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateTopProps)(Weather));

@@ -10,7 +10,7 @@ var express = require('express');
 var proxy = require('http-proxy-middleware');
 var app = express();
 
-app.use('/data', proxy({ target: 'http://www.weather.com.cn', changeOrigin: true }));
+app.use('/data', proxy({ target: 'http://localhost:8080', changeOrigin: true }));
 app.use('/public', express.static('public'));
 
 app.get('/', function (req, res) {

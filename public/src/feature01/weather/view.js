@@ -34,14 +34,14 @@ Weather.propTypes = {
 
 const mapStateTopProps = (state) => {
   const weatherData = state.weather;
-
-  return {
-    status: weatherData.status,
-    cityName: weatherData.city,
-    weather: weatherData.weather,
-    lowestTemp: weatherData.temp1,
-    highestTemp: weatherData.temp2
-  };
+  return weatherData;
+  // return {
+  //   status: weatherData.status,
+  //   cityName: weatherData.city,
+  //   weather: weatherData.weather,
+  //   lowestTemp: weatherData.temp1,
+  //   highestTemp: weatherData.temp2
+  // };
 }
 
 export default connect(mapStateTopProps)(Weather);
